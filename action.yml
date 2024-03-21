@@ -1,0 +1,18 @@
+# action.yml
+name: Latex auto release
+description: Automatically create relese with build latex files
+
+inputs:
+  
+  file-path: 
+    description: Provide path to latext file
+    required: true
+
+outputs:
+
+  is-success:
+    description: Was build succesfully
+  
+runs:
+  using: node12
+  main: action/index.js
