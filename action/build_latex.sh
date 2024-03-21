@@ -13,9 +13,6 @@ done
 echo "File to build $FILEPATH"
 
 
-
-pdflatex $FILEPATH && xdg-open $FILEPATH.pdf
-
 echo ::set-output name=is-success::True
 
 exit 0
