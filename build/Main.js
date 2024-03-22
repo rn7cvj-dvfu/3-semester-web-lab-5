@@ -50,7 +50,7 @@ function run() {
                 case 1:
                     _a.sent();
                     inputs = new Inputs_1.CoreInputs();
-                    core.info("Loaded files: ".concat(inputs.files));
+                    console.log("Loaded files: ".concat(inputs.files));
                     return [3 /*break*/, 3];
                 case 2:
                     error_1 = _a.sent();

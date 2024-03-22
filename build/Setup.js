@@ -42,6 +42,7 @@ function setup() {
     return __awaiter(this, void 0, void 0, function () {
         var src;
         return __generator(this, function (_a) {
+            console.log("Installing pdflatex");
             src = __dirname;
             exec.exec("".concat(src, "/setup.sh"));
             return [2 /*return*/];

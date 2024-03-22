@@ -92,7 +92,7 @@ function run() {
                 case 1:
                     _a.sent();
                     inputs = new Inputs_1.CoreInputs();
-                    core.info("Loaded files: ".concat(inputs.files));
+                    console.log("Loaded files: ".concat(inputs.files));
                     return [3 /*break*/, 3];
                 case 2:
                     error_1 = _a.sent();
@@ -156,6 +156,7 @@ function setup() {
     return __awaiter(this, void 0, void 0, function () {
         var src;
         return __generator(this, function (_a) {
+            console.log("Installing pdflatex");
             src = __dirname;
             exec.exec("".concat(src, "/setup.sh"));
             return [2 /*return*/];
