@@ -1,4 +1,4 @@
-sudo apt-get install texlive-latex-base
-sudo apt-get install texlive-fonts-recommended
-sudo apt-get install texlive-fonts-extra
-sudo apt-get install texlive-latex-extra
+sudo apt-get install texlive-latex-base &> /dev/null
+sudo apt-get install texlive-fonts-recommended &> /dev/null
+sudo apt-get install texlive-fonts-extra &> /dev/null
+sudo apt-get install texlive-latex-extra &> /dev/null

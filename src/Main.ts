@@ -12,7 +12,7 @@ async function run() {
 
         const inputs : Inputs = new CoreInputs()
         
-        core.info(`Loaded files: ${inputs.files}`)
+        console.log(`Loaded files: ${inputs.files}`)
 
     }catch (error) { 
         core.setFailed(error.toString());
