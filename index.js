@@ -6,8 +6,8 @@ const latex = require('node-latex')
 const fs = require('fs')
 
 async function buildLatext(filePath , outputPath){
-    const input = fs.createReadStream('main.tex')
-    const output = fs.createWriteStream('main.pdf')
+    const input = fs.createReadStream(filePath)
+    const output = fs.createWriteStream(outputPath)
     const pdf = latex(input)
     
     pdf.pipe(output)

@@ -38316,8 +38316,8 @@ const latex = __nccwpck_require__(4691)
 const fs = __nccwpck_require__(7147)
 
 async function buildLatext(filePath , outputPath){
-    const input = fs.createReadStream('main.tex')
-    const output = fs.createWriteStream('main.pdf')
+    const input = fs.createReadStream(filePath)
+    const output = fs.createWriteStream(outputPath)
     const pdf = latex(input)
     
     pdf.pipe(output)
