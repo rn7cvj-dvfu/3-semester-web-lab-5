@@ -1,10 +1,10 @@
 import * as core from '@actions/core';
 
 export interface Inputs {
+    
     readonly repoToken: string
     readonly files : string[]
 
-    
 }
 
 export class CoreInputs implements Inputs {

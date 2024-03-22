@@ -36,31 +36,35 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core = require("@actions/core");
-var Inputs_1 = require("./Inputs");
-var Setup_1 = require("./Setup");
-var LatexFile_1 = require("./LatexFile");
-function run() {
-    return __awaiter(this, void 0, void 0, function () {
-        var inputs, latexFiles, error_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, (0, Setup_1.setup)()];
-                case 1:
-                    _a.sent();
-                    inputs = new Inputs_1.CoreInputs();
-                    latexFiles = inputs.files.map(function (filePath) { return new LatexFile_1.LatexFile(filePath); });
-                    latexFiles.forEach(function (latexFile) { return latexFile.build(); });
-                    return [3 /*break*/, 3];
-                case 2:
-                    error_1 = _a.sent();
-                    core.setFailed(error_1.toString());
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
-            }
-        });
+exports.LatexFile = void 0;
+var fs = require("fs");
+var node_latex_1 = require("node-latex");
+var LatexFile = /** @class */ (function () {
+    function LatexFile(filePath) {
+        this.inputPath = filePath;
+        this.outputPath = filePath.replace('.tex', '.pdf');
+        this.input = fs.createReadStream(this.inputPath);
+        this.output = fs.createWriteStream(this.outputPath);
+        console.log("Loaded ".concat(filePath));
+    }
+    Object.defineProperty(LatexFile.prototype, "outputFilePath", {
+        get: function () {
+            return this.outputPath;
+        },
+        enumerable: false,
+        configurable: true
     });
-}
-run();
+    LatexFile.prototype.build = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var pdf;
+            return __generator(this, function (_a) {
+                pdf = (0, node_latex_1.default)(this.input);
+                pdf.pipe(this.output);
+                console.log("Build ".concat(this.inputPath, " to ").concat(this.outputPath));
+                return [2 /*return*/];
+            });
+        });
+    };
+    return LatexFile;
+}());
+exports.LatexFile = LatexFile;
