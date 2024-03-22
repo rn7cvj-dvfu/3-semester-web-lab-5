@@ -38330,7 +38330,7 @@ async function run() {
         const filePath = core.getInput("file-path")
         const src = __dirname
 
-        buildLatext(filePath , filePath.replace('.tex' , '.pdf'))
+        await buildLatext(filePath , filePath.replace('.tex' , '.pdf'))
         
         await exec.exec(`${src}/build_latex.sh -p ${filePath}`)
 
@@ -38341,6 +38341,7 @@ async function run() {
 }
 
 run()
+
 })();
 
 module.exports = __webpack_exports__;
