@@ -3,8 +3,7 @@ name: Latex auto release
 description: Automatically create relese with build latex files
 
 inputs:
-  
-  files: 
+  files:
     description: Provide paths to latext files
     required: true
 
@@ -13,10 +12,9 @@ inputs:
     required: true
 
 outputs:
-
   is-success:
     description: Was build succesfully
-  
+
 runs:
   using: node12
   main: action/index.js

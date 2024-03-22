@@ -37,28 +37,37 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core = require("@actions/core");
+var github = require("@actions/github");
 var Inputs_1 = require("./Inputs");
 var Setup_1 = require("./Setup");
 var LatexFile_1 = require("./LatexFile");
+var Releaser_1 = require("./Releaser");
+var Context_1 = require("./Context");
 function run() {
     return __awaiter(this, void 0, void 0, function () {
-        var inputs, latexFiles, error_1;
+        var inputs, latexFiles, git, context, resleaser, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
+                    _a.trys.push([0, 3, , 4]);
                     return [4 /*yield*/, (0, Setup_1.setup)()];
                 case 1:
                     _a.sent();
                     inputs = new Inputs_1.CoreInputs();
                     latexFiles = inputs.files.map(function (filePath) { return new LatexFile_1.LatexFile(filePath); });
                     latexFiles.forEach(function (latexFile) { return latexFile.build(); });
-                    return [3 /*break*/, 3];
+                    git = github.getOctokit(inputs.repoToken);
+                    context = new Context_1.Context();
+                    resleaser = new Releaser_1.Releaser(git, context, []);
+                    return [4 /*yield*/, resleaser.perform()];
                 case 2:
+                    _a.sent();
+                    return [3 /*break*/, 4];
+                case 3:
                     error_1 = _a.sent();
                     core.setFailed(error_1.toString());
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
             }
         });
     });

@@ -36,23 +36,52 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setup = void 0;
-var exec = require("@actions/exec");
-function setup() {
-    return __awaiter(this, void 0, void 0, function () {
-        var src;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    console.log("Installing pdflatex");
-                    src = __dirname;
-                    return [4 /*yield*/, exec.exec("".concat(src, "/setup.sh"))];
-                case 1:
-                    _a.sent();
-                    console.log("Installing complete");
-                    return [2 /*return*/];
-            }
+exports.Releaser = void 0;
+var Releaser = /** @class */ (function () {
+    function Releaser(git, context, artifacts) {
+        this.git = git;
+        this.context = context;
+        this.artifacts = artifacts;
+    }
+    Releaser.prototype.perform = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var releaseResponse, releaseData, releaseId, uploadUrl, artifactsPromise;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.createRelease()];
+                    case 1:
+                        releaseResponse = _a.sent();
+                        releaseData = releaseResponse.data;
+                        releaseId = releaseData.id;
+                        uploadUrl = releaseData.upload_url;
+                        artifactsPromise = this.artifacts.map(function (artifact) {
+                            return _this.uploadArtifacts(artifact);
+                        });
+                        return [4 /*yield*/, Promise.all(artifactsPromise)];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
         });
-    });
-}
-exports.setup = setup;
+    };
+    Releaser.prototype.createRelease = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.git.rest.repos.createRelease({
+                        repo: this.context.repo,
+                        owner: this.context.owner,
+                        tag_name: this.context.tag,
+                    })];
+            });
+        });
+    };
+    Releaser.prototype.uploadArtifacts = function (artifact) {
+        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
+            return [2 /*return*/];
+        }); });
+    };
+    return Releaser;
+}());
+exports.Releaser = Releaser;

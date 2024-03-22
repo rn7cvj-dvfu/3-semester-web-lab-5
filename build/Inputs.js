@@ -7,7 +7,7 @@ var CoreInputs = /** @class */ (function () {
     }
     Object.defineProperty(CoreInputs.prototype, "repoToken", {
         get: function () {
-            var token = core.getInput('repo-token');
+            var token = core.getInput("repo-token");
             return token;
         },
         enumerable: false,

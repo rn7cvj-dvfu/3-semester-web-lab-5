@@ -38,11 +38,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LatexFile = void 0;
 var fs = require("fs");
-var latex = require('node-latex');
+// TODO:
+// replace to ts import
+var latex = require("node-latex");
 var LatexFile = /** @class */ (function () {
     function LatexFile(filePath) {
         this.inputPath = filePath;
-        this.outputPath = filePath.replace('.tex', '.pdf');
+        this.outputPath = filePath.replace(".tex", ".pdf");
         this.input = fs.createReadStream(this.inputPath);
         this.output = fs.createWriteStream(this.outputPath);
         console.log("Loaded ".concat(filePath));
