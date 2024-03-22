@@ -1,5 +1,7 @@
 import * as fs from 'fs'
 
+// TODO:
+// replace to ts import
 const latex = require('node-latex') 
 
 

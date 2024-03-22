@@ -7,4 +7,7 @@ export async function setup() {
 
     await exec.exec(`${src}/setup.sh`)
 
+
+    console.log("Installing complete")
+
 }
