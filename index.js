@@ -20,7 +20,7 @@ async function run() {
         const filePath = core.getInput("file-path")
         const src = __dirname
 
-        buildLatext(filePath , filePath.replace('.tex' , '.pdf'))
+        await buildLatext(filePath , filePath.replace('.tex' , '.pdf'))
         
         await exec.exec(`${src}/build_latex.sh -p ${filePath}`)
 
