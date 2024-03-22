@@ -8,6 +8,10 @@ inputs:
     description: Provide path to latext file
     required: true
 
+  repo-token:
+    description: "GitHub secret token"
+    required: true
+
 outputs:
 
   is-success:
