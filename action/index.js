@@ -80,7 +80,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LatexFile = void 0;
 var fs = __nccwpck_require__(7147);
-var node_latex_1 = __nccwpck_require__(4691);
+var latex = __nccwpck_require__(4691);
 var LatexFile = /** @class */ (function () {
     function LatexFile(filePath) {
         this.inputPath = filePath;
@@ -100,7 +100,7 @@ var LatexFile = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var pdf;
             return __generator(this, function (_a) {
-                pdf = (0, node_latex_1.default)(this.input);
+                pdf = latex(this.input);
                 pdf.pipe(this.output);
                 console.log("Build ".concat(this.inputPath, " to ").concat(this.outputPath));
                 return [2 /*return*/];

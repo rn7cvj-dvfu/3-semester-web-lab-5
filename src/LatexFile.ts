@@ -1,7 +1,7 @@
-
 import * as fs from 'fs'
 
-import latex from 'node-latex'
+const latex = require('node-latex') 
+
 
 export interface ILatexFile {
     
