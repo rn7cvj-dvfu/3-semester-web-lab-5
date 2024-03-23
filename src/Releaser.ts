@@ -29,13 +29,12 @@ export class Releaser {
     const releaseId = releaseData.id;
     const uploadUrl = releaseData.upload_url;
 
-    const artifactsPromise = this.artifacts.map((artifact) =>
-      this.uploadArtifacts(artifact, releaseId, uploadUrl).finally(() =>
-        console.log(`Upload ${artifact.name}`),
-      ),
-    );
+    this.artifacts.forEach(async (artifact) => {
+      await this.uploadArtifacts(artifact, releaseId, uploadUrl);
+      console.log(`Uploaded ${artifact.name}`);
+    });
 
-    await Promise.all(artifactsPromise);
+    console.log("Release created");
   }
 
   private async createRelease(): Promise<CreateReleaseResponse> {

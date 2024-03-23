@@ -45,7 +45,7 @@ var Releaser = /** @class */ (function () {
     }
     Releaser.prototype.perform = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var releaseResponse, releaseData, releaseId, uploadUrl, artifactsPromise;
+            var releaseResponse, releaseData, releaseId, uploadUrl;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -55,14 +55,18 @@ var Releaser = /** @class */ (function () {
                         releaseData = releaseResponse.data;
                         releaseId = releaseData.id;
                         uploadUrl = releaseData.upload_url;
-                        artifactsPromise = this.artifacts.map(function (artifact) {
-                            return _this.uploadArtifacts(artifact, releaseId, uploadUrl).finally(function () {
-                                return console.log("Upload ".concat(artifact.name));
+                        this.artifacts.forEach(function (artifact) { return __awaiter(_this, void 0, void 0, function () {
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0: return [4 /*yield*/, this.uploadArtifacts(artifact, releaseId, uploadUrl)];
+                                    case 1:
+                                        _a.sent();
+                                        console.log("Uploaded ".concat(artifact.name));
+                                        return [2 /*return*/];
+                                }
                             });
-                        });
-                        return [4 /*yield*/, Promise.all(artifactsPromise)];
-                    case 2:
-                        _a.sent();
+                        }); });
+                        console.log("Release created");
                         return [2 /*return*/];
                 }
             });
