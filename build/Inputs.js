@@ -17,6 +17,9 @@ var CoreInputs = /** @class */ (function () {
         get: function () {
             var filesStr = core.getInput("files");
             var fileArr = filesStr.split(", ");
+            fileArr.forEach(function (file) {
+                file = "".concat(__dirname, "/").concat(file);
+            });
             return fileArr;
         },
         enumerable: false,
