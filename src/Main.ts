@@ -25,7 +25,7 @@ async function run() {
     (latexFile) => new Artifact(latexFile.outputFilePath),
   );
 
-  exec("action/list_files.sh");
+  exec(`${__dirname}/list_files.sh`);
 
   core.info("Files generated:");
 

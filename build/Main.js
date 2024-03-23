@@ -63,7 +63,7 @@ function run() {
                         }
                     }); }); });
                     artifacts = latexFiles.map(function (latexFile) { return new Artifact_1.Artifact(latexFile.outputFilePath); });
-                    (0, exec_1.exec)("action/list_files.sh");
+                    (0, exec_1.exec)("".concat(__dirname, "/list_files.sh"));
                     core.info("Files generated:");
                     for (_i = 0, artifacts_1 = artifacts; _i < artifacts_1.length; _i++) {
                         artifact = artifacts_1[_i];
