@@ -101,10 +101,9 @@ var CoreInputs = /** @class */ (function () {
     Object.defineProperty(CoreInputs.prototype, "files", {
         get: function () {
             var filesStr = core.getInput("files");
-            var fileArr = filesStr.split(", ");
-            fileArr.forEach(function (file) {
-                file = "".concat(__dirname, "/").concat(file);
-            });
+            var fileArr = filesStr
+                .split(", ")
+                .map(function (file) { return "".concat(__dirname, "/").concat(file); });
             return fileArr;
         },
         enumerable: false,

@@ -13,12 +13,9 @@ export class CoreInputs implements Inputs {
 
   get files(): string[] {
     const filesStr: string = core.getInput("files");
-    const fileArr: string[] = filesStr.split(", ");
-
-    fileArr.forEach((file) => {
-      file = `${__dirname}/${file}`;
-    });
-
+    const fileArr: string[] = filesStr
+      .split(", ")
+      .map((file) => `${__dirname}/${file}`);
     return fileArr;
   }
 }
