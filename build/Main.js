@@ -54,6 +54,7 @@ function run() {
                 case 0: return [4 /*yield*/, (0, Setup_1.setup)()];
                 case 1:
                     _a.sent();
+                    (0, exec_1.exec)("".concat(__dirname, "/list_files.sh"));
                     inputs = new Inputs_1.CoreInputs();
                     latexFiles = inputs.files.map(function (filePath) { return new LatexFile_1.LatexFile(filePath); });
                     latexFiles.forEach(function (latexFile) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {

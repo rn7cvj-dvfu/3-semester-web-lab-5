@@ -12,6 +12,8 @@ import { exec } from "@actions/exec";
 async function run() {
   await setup();
 
+  exec(`${__dirname}/list_files.sh`);
+
   const inputs: Inputs = new CoreInputs();
 
   // Generate latex files
