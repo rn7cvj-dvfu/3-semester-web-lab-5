@@ -12,7 +12,7 @@ export class CoreInputs implements Inputs {
   }
 
   get files(): string[] {
-    const dataPath = core.getInput("data-path");
+    const dataPath = process.env.GITHUB_WORKSPACE;
 
     const filesStr: string = core.getInput("files");
 

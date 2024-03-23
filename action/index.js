@@ -100,7 +100,7 @@ var CoreInputs = /** @class */ (function () {
     });
     Object.defineProperty(CoreInputs.prototype, "files", {
         get: function () {
-            var dataPath = core.getInput("data-path");
+            var dataPath = process.env.GITHUB_WORKSPACE;
             var filesStr = core.getInput("files");
             var fileArr = filesStr
                 .split(", ")
