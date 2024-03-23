@@ -1,5 +1,5 @@
 import { basename } from "path";
-import { createReadStream, readFileSync, ReadStream, statSync } from "fs";
+import { createReadStream, ReadStream, statSync } from "fs";
 
 export class Artifact {
   readonly contentType: string;

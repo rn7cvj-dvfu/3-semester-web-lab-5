@@ -54,7 +54,7 @@ export class Releaser {
     return this.git.rest.repos.uploadReleaseAsset({
       url: uploadUrl,
       headers: {
-        "content-length": artifact.contentLength,
+        "content-length": artifact.contentLength + 1,
         "content-type": artifact.contentType,
       },
       data: artifact.readFile() as any,
