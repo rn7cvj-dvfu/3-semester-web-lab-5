@@ -15,10 +15,11 @@ var CoreInputs = /** @class */ (function () {
     });
     Object.defineProperty(CoreInputs.prototype, "files", {
         get: function () {
+            var dataPath = core.getInput("data-path");
             var filesStr = core.getInput("files");
             var fileArr = filesStr
                 .split(", ")
-                .map(function (file) { return "".concat(__dirname, "/").concat(file); });
+                .map(function (file) { return "".concat(dataPath, "/").concat(file); });
             return fileArr;
         },
         enumerable: false,

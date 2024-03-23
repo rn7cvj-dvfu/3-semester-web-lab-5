@@ -12,10 +12,13 @@ export class CoreInputs implements Inputs {
   }
 
   get files(): string[] {
+    const dataPath = core.getInput("data-path");
+
     const filesStr: string = core.getInput("files");
+
     const fileArr: string[] = filesStr
       .split(", ")
-      .map((file) => `${__dirname}/${file}`);
+      .map((file) => `${dataPath}/${file}`);
     return fileArr;
   }
 }

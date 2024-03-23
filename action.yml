@@ -11,6 +11,10 @@ inputs:
     description: "GitHub secret token"
     required: true
 
+  data-path:
+    description: "Path to files, by default  data_path = ${{ github.workspace }}"
+    required: true
+
 outputs:
   is-success:
     description: Was build succesfully
