@@ -3,8 +3,8 @@ import { RestEndpointMethodTypes } from "@octokit/plugin-rest-endpoint-methods";
 
 export type CreateReleaseResponse =
   RestEndpointMethodTypes["repos"]["createRelease"]["response"];
-export type UploadArtifactResponse = RestEndpointMethodTypes["repos"]["uploadReleaseAsset"]["response"]
-
+export type UploadArtifactResponse =
+  RestEndpointMethodTypes["repos"]["uploadReleaseAsset"]["response"];
 
 import { Inputs } from "./Inputs";
 import { GitHub } from "@actions/github/lib/utils";
@@ -30,7 +30,9 @@ export class Releaser {
     const uploadUrl = releaseData.upload_url;
 
     const artifactsPromise = this.artifacts.map((artifact) =>
-      this.uploadArtifacts(artifact , releaseId , uploadUrl),
+      this.uploadArtifacts(artifact, releaseId, uploadUrl).finally(() =>
+        console.log(`Upload ${artifact.name}`),
+      ),
     );
 
     await Promise.all(artifactsPromise);
@@ -44,19 +46,22 @@ export class Releaser {
     });
   }
 
-    private async uploadArtifacts(artifact :  Artifact , releaseId : number , uploadUrl : string ) : Promise<UploadArtifactResponse>  { 
-        return this.git.rest.repos.uploadReleaseAsset({
-            url: uploadUrl,
-            headers: {
-                "content-length": artifact.contentLength,
-                "content-type": artifact.contentType
-            },
-            data: artifact.readFile() as any,
-            name: artifact.name,
-            owner: this.context.owner,
-            release_id: releaseId,
-            repo: this.context.repo,
-        })
-    }
- 
+  private async uploadArtifacts(
+    artifact: Artifact,
+    releaseId: number,
+    uploadUrl: string,
+  ): Promise<UploadArtifactResponse> {
+    return this.git.rest.repos.uploadReleaseAsset({
+      url: uploadUrl,
+      headers: {
+        "content-length": artifact.contentLength,
+        "content-type": artifact.contentType,
+      },
+      data: artifact.readFile() as any,
+      name: artifact.name,
+      owner: this.context.owner,
+      release_id: releaseId,
+      repo: this.context.repo,
+    });
+  }
 }

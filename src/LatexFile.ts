@@ -16,12 +16,12 @@ export class LatexFile implements ILatexFile {
   private output: fs.WriteStream;
 
   constructor(filePath: string) {
-    this.inputPath = filePath
-    this.outputPath = filePath.replace(".tex", ".pdf")
+    this.inputPath = filePath;
+    this.outputPath = filePath.replace(".tex", ".pdf");
 
-    this.input = fs.createReadStream(this.inputPath)
-    this.output = fs.createWriteStream(this.outputPath); 
-    
+    this.input = fs.createReadStream(this.inputPath);
+    this.output = fs.createWriteStream(this.outputPath);
+
     console.log(`Loaded ${filePath}`);
   }
 

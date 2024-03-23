@@ -6,34 +6,31 @@ import { setup } from "./Setup";
 import { ILatexFile, LatexFile } from "./LatexFile";
 import { Releaser } from "./Releaser";
 import { Context } from "./Context";
-import { Artifact } from './Artifact';
+import { Artifact } from "./Artifact";
 
 async function run() {
-  try {
-    await setup();
+  await setup();
 
-    const inputs: Inputs = new CoreInputs();
+  const inputs: Inputs = new CoreInputs();
 
-    // Generate latex files
-    const latexFiles: ILatexFile[] = inputs.files.map(
-      (filePath) => new LatexFile(filePath),
-    )
-    
-    latexFiles.forEach((latexFile) => latexFile.build())
+  // Generate latex files
+  const latexFiles: ILatexFile[] = inputs.files.map(
+    (filePath) => new LatexFile(filePath),
+  );
 
-    const artifacts : Artifact[] = latexFiles.map((latexFile) => new Artifact(latexFile.outputFilePath))
+  latexFiles.forEach((latexFile) => latexFile.build());
 
-    // Create relese
-    const git = github.getOctokit(inputs.repoToken)
+  const artifacts: Artifact[] = latexFiles.map(
+    (latexFile) => new Artifact(latexFile.outputFilePath),
+  );
 
-    const context = new Context()
-    const resleaser: Releaser = new Releaser(git, context, artifacts)
+  // Create relese
+  const git = github.getOctokit(inputs.repoToken);
 
-    await resleaser.perform();
+  const context = new Context();
+  const resleaser: Releaser = new Releaser(git, context, artifacts);
 
-  } catch (error) {
-    core.setFailed(error.toString());
-  }
+  await resleaser.perform();
 }
 
-run();
+run().catch((error) => core.setFailed(error.message));

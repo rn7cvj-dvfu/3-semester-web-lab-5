@@ -246,12 +246,10 @@ var Context_1 = __nccwpck_require__(7225);
 var Artifact_1 = __nccwpck_require__(2489);
 function run() {
     return __awaiter(this, void 0, void 0, function () {
-        var inputs, latexFiles, artifacts, git, context, resleaser, error_1;
+        var inputs, latexFiles, artifacts, git, context, resleaser;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 3, , 4]);
-                    return [4 /*yield*/, (0, Setup_1.setup)()];
+                case 0: return [4 /*yield*/, (0, Setup_1.setup)()];
                 case 1:
                     _a.sent();
                     inputs = new Inputs_1.CoreInputs();
@@ -264,17 +262,12 @@ function run() {
                     return [4 /*yield*/, resleaser.perform()];
                 case 2:
                     _a.sent();
-                    return [3 /*break*/, 4];
-                case 3:
-                    error_1 = _a.sent();
-                    core.setFailed(error_1.toString());
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                    return [2 /*return*/];
             }
         });
     });
 }
-run();
+run().catch(function (error) { return core.setFailed(error.message); });
 
 
 /***/ }),
@@ -341,7 +334,9 @@ var Releaser = /** @class */ (function () {
                         releaseId = releaseData.id;
                         uploadUrl = releaseData.upload_url;
                         artifactsPromise = this.artifacts.map(function (artifact) {
-                            return _this.uploadArtifacts(artifact, releaseId, uploadUrl);
+                            return _this.uploadArtifacts(artifact, releaseId, uploadUrl).finally(function () {
+                                return console.log("Upload ".concat(artifact.name));
+                            });
                         });
                         return [4 /*yield*/, Promise.all(artifactsPromise)];
                     case 2:
@@ -369,7 +364,7 @@ var Releaser = /** @class */ (function () {
                         url: uploadUrl,
                         headers: {
                             "content-length": artifact.contentLength,
-                            "content-type": artifact.contentType
+                            "content-type": artifact.contentType,
                         },
                         data: artifact.readFile(),
                         name: artifact.name,

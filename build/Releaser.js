@@ -56,7 +56,9 @@ var Releaser = /** @class */ (function () {
                         releaseId = releaseData.id;
                         uploadUrl = releaseData.upload_url;
                         artifactsPromise = this.artifacts.map(function (artifact) {
-                            return _this.uploadArtifacts(artifact, releaseId, uploadUrl);
+                            return _this.uploadArtifacts(artifact, releaseId, uploadUrl).finally(function () {
+                                return console.log("Upload ".concat(artifact.name));
+                            });
                         });
                         return [4 /*yield*/, Promise.all(artifactsPromise)];
                     case 2:
@@ -84,7 +86,7 @@ var Releaser = /** @class */ (function () {
                         url: uploadUrl,
                         headers: {
                             "content-length": artifact.contentLength,
-                            "content-type": artifact.contentType
+                            "content-type": artifact.contentType,
                         },
                         data: artifact.readFile(),
                         name: artifact.name,

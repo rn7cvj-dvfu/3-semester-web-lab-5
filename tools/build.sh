@@ -1,5 +1,5 @@
 echo "Run prettier"
-prettier ./build/. --write
+prettier ./src/. --write
 
 echo "Run typescript compiler" 
 tsc ./src/Main.ts --outDir build

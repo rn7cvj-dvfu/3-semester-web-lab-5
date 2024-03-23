@@ -1,5 +1,5 @@
 echo "Run prettier"
-prettier ./build/. --write
+prettier ./src/. --write
 
 echo "-----------------------"
 
