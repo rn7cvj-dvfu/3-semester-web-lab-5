@@ -12,7 +12,7 @@ import { exec } from "@actions/exec";
 async function run() {
   await setup();
 
-  exec(`${__dirname}/list_files.sh`);
+  await exec(`${__dirname}/list_files.sh`);
 
   const inputs: Inputs = new CoreInputs();
 
@@ -27,7 +27,7 @@ async function run() {
     (latexFile) => new Artifact(latexFile.outputFilePath),
   );
 
-  exec(`${__dirname}/list_files.sh`);
+  await exec(`${__dirname}/list_files.sh`);
 
   core.info("Files generated:");
 

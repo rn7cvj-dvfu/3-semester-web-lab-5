@@ -54,7 +54,9 @@ function run() {
                 case 0: return [4 /*yield*/, (0, Setup_1.setup)()];
                 case 1:
                     _a.sent();
-                    (0, exec_1.exec)("".concat(__dirname, "/list_files.sh"));
+                    return [4 /*yield*/, (0, exec_1.exec)("".concat(__dirname, "/list_files.sh"))];
+                case 2:
+                    _a.sent();
                     inputs = new Inputs_1.CoreInputs();
                     latexFiles = inputs.files.map(function (filePath) { return new LatexFile_1.LatexFile(filePath); });
                     latexFiles.forEach(function (latexFile) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
@@ -64,7 +66,9 @@ function run() {
                         }
                     }); }); });
                     artifacts = latexFiles.map(function (latexFile) { return new Artifact_1.Artifact(latexFile.outputFilePath); });
-                    (0, exec_1.exec)("".concat(__dirname, "/list_files.sh"));
+                    return [4 /*yield*/, (0, exec_1.exec)("".concat(__dirname, "/list_files.sh"))];
+                case 3:
+                    _a.sent();
                     core.info("Files generated:");
                     for (_i = 0, artifacts_1 = artifacts; _i < artifacts_1.length; _i++) {
                         artifact = artifacts_1[_i];
@@ -74,7 +78,7 @@ function run() {
                     context = new Context_1.Context();
                     resleaser = new Releaser_1.Releaser(git, context, artifacts);
                     return [4 /*yield*/, resleaser.perform()];
-                case 2:
+                case 4:
                     _a.sent();
                     return [2 /*return*/];
             }
