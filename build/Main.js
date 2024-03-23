@@ -43,9 +43,10 @@ var Setup_1 = require("./Setup");
 var LatexFile_1 = require("./LatexFile");
 var Releaser_1 = require("./Releaser");
 var Context_1 = require("./Context");
+var Artifact_1 = require("./Artifact");
 function run() {
     return __awaiter(this, void 0, void 0, function () {
-        var inputs, latexFiles, git, context, resleaser, error_1;
+        var inputs, latexFiles, artifacts, git, context, resleaser, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -56,9 +57,10 @@ function run() {
                     inputs = new Inputs_1.CoreInputs();
                     latexFiles = inputs.files.map(function (filePath) { return new LatexFile_1.LatexFile(filePath); });
                     latexFiles.forEach(function (latexFile) { return latexFile.build(); });
+                    artifacts = latexFiles.map(function (latexFile) { return new Artifact_1.Artifact(latexFile.outputFilePath); });
                     git = github.getOctokit(inputs.repoToken);
                     context = new Context_1.Context();
-                    resleaser = new Releaser_1.Releaser(git, context, []);
+                    resleaser = new Releaser_1.Releaser(git, context, artifacts);
                     return [4 /*yield*/, resleaser.perform()];
                 case 2:
                     _a.sent();

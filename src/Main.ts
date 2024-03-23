@@ -17,17 +17,20 @@ async function run() {
     // Generate latex files
     const latexFiles: ILatexFile[] = inputs.files.map(
       (filePath) => new LatexFile(filePath),
-    );
-    latexFiles.forEach((latexFile) => latexFile.build());
+    )
+    
+    latexFiles.forEach((latexFile) => latexFile.build())
 
-        const artifacts : Artifact[] = latexFiles.map((latexFile) => new Artifact(latexFile.outputFilePath))
+    const artifacts : Artifact[] = latexFiles.map((latexFile) => new Artifact(latexFile.outputFilePath))
 
     // Create relese
-    const git = github.getOctokit(inputs.repoToken);
-    const context = new Context();
-    const resleaser: Releaser = new Releaser(git, context, []);
+    const git = github.getOctokit(inputs.repoToken)
+
+    const context = new Context()
+    const resleaser: Releaser = new Releaser(git, context, artifacts)
 
     await resleaser.perform();
+
   } catch (error) {
     core.setFailed(error.toString());
   }

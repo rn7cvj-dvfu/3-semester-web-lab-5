@@ -56,7 +56,7 @@ var Releaser = /** @class */ (function () {
                         releaseId = releaseData.id;
                         uploadUrl = releaseData.upload_url;
                         artifactsPromise = this.artifacts.map(function (artifact) {
-                            return _this.uploadArtifacts(artifact);
+                            return _this.uploadArtifacts(artifact, releaseId, uploadUrl);
                         });
                         return [4 /*yield*/, Promise.all(artifactsPromise)];
                     case 2:
@@ -77,10 +77,23 @@ var Releaser = /** @class */ (function () {
             });
         });
     };
-    Releaser.prototype.uploadArtifacts = function (artifact) {
-        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
-            return [2 /*return*/];
-        }); });
+    Releaser.prototype.uploadArtifacts = function (artifact, releaseId, uploadUrl) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.git.rest.repos.uploadReleaseAsset({
+                        url: uploadUrl,
+                        headers: {
+                            "content-length": artifact.contentLength,
+                            "content-type": artifact.contentType
+                        },
+                        data: artifact.readFile(),
+                        name: artifact.name,
+                        owner: this.context.owner,
+                        release_id: releaseId,
+                        repo: this.context.repo,
+                    })];
+            });
+        });
     };
     return Releaser;
 }());

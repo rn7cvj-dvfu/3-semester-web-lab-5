@@ -30,7 +30,7 @@ export class Releaser {
     const uploadUrl = releaseData.upload_url;
 
     const artifactsPromise = this.artifacts.map((artifact) =>
-      this.uploadArtifacts(artifact),
+      this.uploadArtifacts(artifact , releaseId , uploadUrl),
     );
 
     await Promise.all(artifactsPromise);
