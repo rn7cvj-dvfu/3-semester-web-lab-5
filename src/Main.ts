@@ -18,8 +18,6 @@ async function run() {
     (filePath) => new LatexFile(filePath),
   );
 
-  latexFiles.forEach(async (latexFile) => await latexFile.build());
-
   const artifacts: Artifact[] = latexFiles.map(
     (latexFile) => new Artifact(latexFile.outputFilePath),
   );
@@ -29,11 +27,6 @@ async function run() {
 
   const context = new Context();
   const resleaser: Releaser = new Releaser(git, context, artifacts);
-
-  core.info("Creating release");
-  core.info(
-    `Artifacts: ${artifacts.map((artifact) => artifact.name).join(", ")}`,
-  );
 
   await resleaser.perform();
 }
