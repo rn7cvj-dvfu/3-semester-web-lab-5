@@ -49,7 +49,9 @@ var Releaser = /** @class */ (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.createRelease()];
+                    case 0:
+                        console.log("Creating release");
+                        return [4 /*yield*/, this.createRelease()];
                     case 1:
                         releaseResponse = _a.sent();
                         releaseData = releaseResponse.data;

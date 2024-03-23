@@ -23,6 +23,8 @@ export class Releaser {
   }
 
   public async perform(): Promise<void> {
+    console.log("Creating release");
+
     const releaseResponse = await this.createRelease();
 
     const releaseData = releaseResponse.data;

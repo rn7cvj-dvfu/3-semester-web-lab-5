@@ -18,7 +18,7 @@ async function run() {
     (filePath) => new LatexFile(filePath),
   );
 
-  latexFiles.forEach((latexFile) => latexFile.build());
+  latexFiles.forEach(async (latexFile) => await latexFile.build());
 
   const artifacts: Artifact[] = latexFiles.map(
     (latexFile) => new Artifact(latexFile.outputFilePath),
