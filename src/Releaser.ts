@@ -6,7 +6,6 @@ export type CreateReleaseResponse =
 export type UploadArtifactResponse =
   RestEndpointMethodTypes["repos"]["uploadReleaseAsset"]["response"];
 
-import { Inputs } from "./Inputs";
 import { GitHub } from "@actions/github/lib/utils";
 import { IContext } from "./Context";
 import { Artifact } from "./Artifact";
@@ -23,7 +22,7 @@ export class Releaser {
   }
 
   public async perform(): Promise<void> {
-    console.log("Creating release");
+    core.info("Creating release");
 
     const releaseResponse = await this.createRelease();
 
@@ -33,10 +32,10 @@ export class Releaser {
 
     this.artifacts.forEach(async (artifact) => {
       await this.uploadArtifacts(artifact, releaseId, uploadUrl);
-      console.log(`Uploaded ${artifact.name}`);
+      core.info(`Uploaded ${artifact.name}`);
     });
 
-    console.log("Release created");
+    core.info("Release created");
   }
 
   private async createRelease(): Promise<CreateReleaseResponse> {

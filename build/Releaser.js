@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Releaser = void 0;
+var core = require("@actions/core");
 var Releaser = /** @class */ (function () {
     function Releaser(git, context, artifacts) {
         this.git = git;
@@ -50,7 +51,7 @@ var Releaser = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("Creating release");
+                        core.info("Creating release");
                         return [4 /*yield*/, this.createRelease()];
                     case 1:
                         releaseResponse = _a.sent();
@@ -63,12 +64,12 @@ var Releaser = /** @class */ (function () {
                                     case 0: return [4 /*yield*/, this.uploadArtifacts(artifact, releaseId, uploadUrl)];
                                     case 1:
                                         _a.sent();
-                                        console.log("Uploaded ".concat(artifact.name));
+                                        core.info("Uploaded ".concat(artifact.name));
                                         return [2 /*return*/];
                                 }
                             });
                         }); });
-                        console.log("Release created");
+                        core.info("Release created");
                         return [2 /*return*/];
                 }
             });

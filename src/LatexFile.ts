@@ -1,3 +1,4 @@
+import * as core from "@actions/core";
 import * as fs from "fs";
 
 // TODO:
@@ -22,7 +23,7 @@ export class LatexFile implements ILatexFile {
     this.input = fs.createReadStream(this.inputPath);
     this.output = fs.createWriteStream(this.outputPath);
 
-    console.log(`Loaded ${filePath}`);
+    core.info(`Loaded ${filePath}`);
   }
 
   get outputFilePath() {
@@ -34,6 +35,6 @@ export class LatexFile implements ILatexFile {
 
     pdf.pipe(this.output);
 
-    console.log(`Build ${this.inputPath} to ${this.outputPath}`);
+    core.info(`Build ${this.inputPath} to ${this.outputPath}`);
   }
 }

@@ -157,6 +157,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LatexFile = void 0;
+var core = __nccwpck_require__(6024);
 var fs = __nccwpck_require__(7147);
 // TODO:
 // replace to ts import
@@ -167,7 +168,7 @@ var LatexFile = /** @class */ (function () {
         this.outputPath = filePath.replace(".tex", ".pdf");
         this.input = fs.createReadStream(this.inputPath);
         this.output = fs.createWriteStream(this.outputPath);
-        console.log("Loaded ".concat(filePath));
+        core.info("Loaded ".concat(filePath));
     }
     Object.defineProperty(LatexFile.prototype, "outputFilePath", {
         get: function () {
@@ -182,7 +183,7 @@ var LatexFile = /** @class */ (function () {
             return __generator(this, function (_a) {
                 pdf = latex(this.input);
                 pdf.pipe(this.output);
-                console.log("Build ".concat(this.inputPath, " to ").concat(this.outputPath));
+                core.info("Build ".concat(this.inputPath, " to ").concat(this.outputPath));
                 return [2 /*return*/];
             });
         });
@@ -279,7 +280,7 @@ run().catch(function (error) { return core.setFailed(error.message); });
 /***/ }),
 
 /***/ 5063:
-/***/ (function(__unused_webpack_module, exports) {
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
 
@@ -321,6 +322,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Releaser = void 0;
+var core = __nccwpck_require__(6024);
 var Releaser = /** @class */ (function () {
     function Releaser(git, context, artifacts) {
         this.git = git;
@@ -334,7 +336,7 @@ var Releaser = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("Creating release");
+                        core.info("Creating release");
                         return [4 /*yield*/, this.createRelease()];
                     case 1:
                         releaseResponse = _a.sent();
@@ -347,12 +349,12 @@ var Releaser = /** @class */ (function () {
                                     case 0: return [4 /*yield*/, this.uploadArtifacts(artifact, releaseId, uploadUrl)];
                                     case 1:
                                         _a.sent();
-                                        console.log("Uploaded ".concat(artifact.name));
+                                        core.info("Uploaded ".concat(artifact.name));
                                         return [2 /*return*/];
                                 }
                             });
                         }); });
-                        console.log("Release created");
+                        core.info("Release created");
                         return [2 /*return*/];
                 }
             });
@@ -437,6 +439,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.setup = void 0;
+var core = __nccwpck_require__(6024);
 var exec = __nccwpck_require__(2423);
 function setup() {
     return __awaiter(this, void 0, void 0, function () {
@@ -444,12 +447,12 @@ function setup() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    console.log("Installing pdflatex");
+                    core.info("Installing pdflatex");
                     src = __dirname;
                     return [4 /*yield*/, exec.exec("".concat(src, "/setup.sh"))];
                 case 1:
                     _a.sent();
-                    console.log("Installing complete");
+                    core.info("Installing complete");
                     return [2 /*return*/];
             }
         });

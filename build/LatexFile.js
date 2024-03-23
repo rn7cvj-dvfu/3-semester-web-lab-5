@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LatexFile = void 0;
+var core = require("@actions/core");
 var fs = require("fs");
 // TODO:
 // replace to ts import
@@ -47,7 +48,7 @@ var LatexFile = /** @class */ (function () {
         this.outputPath = filePath.replace(".tex", ".pdf");
         this.input = fs.createReadStream(this.inputPath);
         this.output = fs.createWriteStream(this.outputPath);
-        console.log("Loaded ".concat(filePath));
+        core.info("Loaded ".concat(filePath));
     }
     Object.defineProperty(LatexFile.prototype, "outputFilePath", {
         get: function () {
@@ -62,7 +63,7 @@ var LatexFile = /** @class */ (function () {
             return __generator(this, function (_a) {
                 pdf = latex(this.input);
                 pdf.pipe(this.output);
-                console.log("Build ".concat(this.inputPath, " to ").concat(this.outputPath));
+                core.info("Build ".concat(this.inputPath, " to ").concat(this.outputPath));
                 return [2 /*return*/];
             });
         });

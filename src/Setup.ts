@@ -1,10 +1,11 @@
+import * as core from "@actions/core";
 import * as exec from "@actions/exec";
 
 export async function setup() {
-  console.log("Installing pdflatex");
+  core.info("Installing pdflatex");
   const src = __dirname;
 
   await exec.exec(`${src}/setup.sh`);
 
-  console.log("Installing complete");
+  core.info("Installing complete");
 }

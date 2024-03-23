@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setup = void 0;
+var core = require("@actions/core");
 var exec = require("@actions/exec");
 function setup() {
     return __awaiter(this, void 0, void 0, function () {
@@ -44,12 +45,12 @@ function setup() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    console.log("Installing pdflatex");
+                    core.info("Installing pdflatex");
                     src = __dirname;
                     return [4 /*yield*/, exec.exec("".concat(src, "/setup.sh"))];
                 case 1:
                     _a.sent();
-                    console.log("Installing complete");
+                    core.info("Installing complete");
                     return [2 /*return*/];
             }
         });
