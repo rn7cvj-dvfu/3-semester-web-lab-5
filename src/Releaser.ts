@@ -3,6 +3,8 @@ import { RestEndpointMethodTypes } from "@octokit/plugin-rest-endpoint-methods";
 
 export type CreateReleaseResponse =
   RestEndpointMethodTypes["repos"]["createRelease"]["response"];
+export type UploadArtifactResponse = RestEndpointMethodTypes["repos"]["uploadReleaseAsset"]["response"]
+
 
 import { Inputs } from "./Inputs";
 import { GitHub } from "@actions/github/lib/utils";
@@ -42,5 +44,19 @@ export class Releaser {
     });
   }
 
-  private async uploadArtifacts(artifact: Artifact) {}
+    private async uploadArtifacts(artifact :  Artifact , releaseId : number , uploadUrl : string ) : Promise<UploadArtifactResponse>  { 
+        return this.git.rest.repos.uploadReleaseAsset({
+            url: uploadUrl,
+            headers: {
+                "content-length": artifact.contentLength,
+                "content-type": artifact.contentType
+            },
+            data: artifact.readFile() as any,
+            name: artifact.name,
+            owner: this.context.owner,
+            release_id: releaseId,
+            repo: this.context.repo,
+        })
+    }
+ 
 }

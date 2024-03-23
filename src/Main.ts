@@ -6,6 +6,7 @@ import { setup } from "./Setup";
 import { ILatexFile, LatexFile } from "./LatexFile";
 import { Releaser } from "./Releaser";
 import { Context } from "./Context";
+import { Artifact } from './Artifact';
 
 async function run() {
   try {
@@ -19,7 +20,7 @@ async function run() {
     );
     latexFiles.forEach((latexFile) => latexFile.build());
 
-    // const outputFiles : string[] = latexFiles.map((latexFile) => latexFile.outputFilePath)
+        const artifacts : Artifact[] = latexFiles.map((latexFile) => new Artifact(latexFile.outputFilePath))
 
     // Create relese
     const git = github.getOctokit(inputs.repoToken);
