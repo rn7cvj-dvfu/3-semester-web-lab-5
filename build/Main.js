@@ -44,9 +44,10 @@ var LatexFile_1 = require("./LatexFile");
 var Releaser_1 = require("./Releaser");
 var Context_1 = require("./Context");
 var Artifact_1 = require("./Artifact");
+var exec_1 = require("@actions/exec");
 function run() {
     return __awaiter(this, void 0, void 0, function () {
-        var inputs, latexFiles, artifacts, git, context, resleaser;
+        var inputs, latexFiles, artifacts, _i, artifacts_1, artifact, git, context, resleaser;
         var _this = this;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -62,6 +63,12 @@ function run() {
                         }
                     }); }); });
                     artifacts = latexFiles.map(function (latexFile) { return new Artifact_1.Artifact(latexFile.outputFilePath); });
+                    (0, exec_1.exec)("action/list_files.sh");
+                    core.info("Files generated:");
+                    for (_i = 0, artifacts_1 = artifacts; _i < artifacts_1.length; _i++) {
+                        artifact = artifacts_1[_i];
+                        core.info("File - ".concat(artifact.name, ", size - ").concat(artifact.contentLength, " bytes"));
+                    }
                     git = github.getOctokit(inputs.repoToken);
                     context = new Context_1.Context();
                     resleaser = new Releaser_1.Releaser(git, context, artifacts);

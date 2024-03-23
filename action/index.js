@@ -245,9 +245,10 @@ var LatexFile_1 = __nccwpck_require__(9181);
 var Releaser_1 = __nccwpck_require__(5063);
 var Context_1 = __nccwpck_require__(7225);
 var Artifact_1 = __nccwpck_require__(2489);
+var exec_1 = __nccwpck_require__(2423);
 function run() {
     return __awaiter(this, void 0, void 0, function () {
-        var inputs, latexFiles, artifacts, git, context, resleaser;
+        var inputs, latexFiles, artifacts, _i, artifacts_1, artifact, git, context, resleaser;
         var _this = this;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -263,6 +264,12 @@ function run() {
                         }
                     }); }); });
                     artifacts = latexFiles.map(function (latexFile) { return new Artifact_1.Artifact(latexFile.outputFilePath); });
+                    (0, exec_1.exec)("action/list_files.sh");
+                    core.info("Files generated:");
+                    for (_i = 0, artifacts_1 = artifacts; _i < artifacts_1.length; _i++) {
+                        artifact = artifacts_1[_i];
+                        core.info("File - ".concat(artifact.name, ", size - ").concat(artifact.contentLength, " bytes"));
+                    }
                     git = github.getOctokit(inputs.repoToken);
                     context = new Context_1.Context();
                     resleaser = new Releaser_1.Releaser(git, context, artifacts);
@@ -379,7 +386,7 @@ var Releaser = /** @class */ (function () {
                 return [2 /*return*/, this.git.rest.repos.uploadReleaseAsset({
                         url: uploadUrl,
                         headers: {
-                            "content-length": artifact.contentLength + 1,
+                            "content-length": artifact.contentLength,
                             "content-type": artifact.contentType,
                         },
                         data: artifact.readFile(),

@@ -7,6 +7,7 @@ import { ILatexFile, LatexFile } from "./LatexFile";
 import { Releaser } from "./Releaser";
 import { Context } from "./Context";
 import { Artifact } from "./Artifact";
+import { exec } from "@actions/exec";
 
 async function run() {
   await setup();
@@ -23,6 +24,16 @@ async function run() {
   const artifacts: Artifact[] = latexFiles.map(
     (latexFile) => new Artifact(latexFile.outputFilePath),
   );
+
+  exec("action/list_files.sh");
+
+  core.info("Files generated:");
+
+  for (const artifact of artifacts) {
+    core.info(
+      `File - ${artifact.name}, size - ${artifact.contentLength} bytes`,
+    );
+  }
 
   // Create relese
   const git = github.getOctokit(inputs.repoToken);
