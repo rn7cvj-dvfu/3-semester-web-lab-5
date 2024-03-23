@@ -30,10 +30,10 @@ export class Releaser {
     const releaseId = releaseData.id;
     const uploadUrl = releaseData.upload_url;
 
-    this.artifacts.forEach(async (artifact) => {
+    for (const artifact of this.artifacts) {
       await this.uploadArtifacts(artifact, releaseId, uploadUrl);
       core.info(`Uploaded ${artifact.name}`);
-    });
+    }
 
     core.info("Release created");
   }

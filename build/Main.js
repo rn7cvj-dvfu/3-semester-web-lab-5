@@ -65,6 +65,8 @@ function run() {
                     git = github.getOctokit(inputs.repoToken);
                     context = new Context_1.Context();
                     resleaser = new Releaser_1.Releaser(git, context, artifacts);
+                    core.info("Creating release");
+                    core.info("Artifacts: ".concat(artifacts.map(function (artifact) { return artifact.name; }).join(", ")));
                     return [4 /*yield*/, resleaser.perform()];
                 case 2:
                     _a.sent();

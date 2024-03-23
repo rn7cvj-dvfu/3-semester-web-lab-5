@@ -46,29 +46,31 @@ var Releaser = /** @class */ (function () {
     }
     Releaser.prototype.perform = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var releaseResponse, releaseData, releaseId, uploadUrl;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var releaseResponse, releaseData, releaseId, uploadUrl, _i, _a, artifact;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         core.info("Creating release");
                         return [4 /*yield*/, this.createRelease()];
                     case 1:
-                        releaseResponse = _a.sent();
+                        releaseResponse = _b.sent();
                         releaseData = releaseResponse.data;
                         releaseId = releaseData.id;
                         uploadUrl = releaseData.upload_url;
-                        this.artifacts.forEach(function (artifact) { return __awaiter(_this, void 0, void 0, function () {
-                            return __generator(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0: return [4 /*yield*/, this.uploadArtifacts(artifact, releaseId, uploadUrl)];
-                                    case 1:
-                                        _a.sent();
-                                        core.info("Uploaded ".concat(artifact.name));
-                                        return [2 /*return*/];
-                                }
-                            });
-                        }); });
+                        _i = 0, _a = this.artifacts;
+                        _b.label = 2;
+                    case 2:
+                        if (!(_i < _a.length)) return [3 /*break*/, 5];
+                        artifact = _a[_i];
+                        return [4 /*yield*/, this.uploadArtifacts(artifact, releaseId, uploadUrl)];
+                    case 3:
+                        _b.sent();
+                        core.info("Uploaded ".concat(artifact.name));
+                        _b.label = 4;
+                    case 4:
+                        _i++;
+                        return [3 /*break*/, 2];
+                    case 5:
                         core.info("Release created");
                         return [2 /*return*/];
                 }
