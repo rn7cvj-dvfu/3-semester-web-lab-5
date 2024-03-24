@@ -43,6 +43,8 @@ export class Releaser {
       repo: this.context.repo,
       owner: this.context.owner,
       tag_name: this.context.tag,
+      tarball_url: null,
+      zipball_url: null,
     });
   }
 
