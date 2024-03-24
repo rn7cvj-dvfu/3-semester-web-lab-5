@@ -12,8 +12,6 @@ import { exec } from "@actions/exec";
 async function run() {
   await setup();
 
-  await exec(`${__dirname}/list_files.sh`);
-
   const inputs: Inputs = new CoreInputs();
 
   // Generate latex files
@@ -27,15 +25,6 @@ async function run() {
     (latexFile) => new Artifact(latexFile.outputFilePath),
   );
 
-  await exec(`${__dirname}/list_files.sh`);
-
-  core.info("Files generated:");
-
-  for (const artifact of artifacts) {
-    core.info(
-      `File - ${artifact.name}, size - ${artifact.contentLength} bytes`,
-    );
-  }
 
   // Create relese
   const git = github.getOctokit(inputs.repoToken);
