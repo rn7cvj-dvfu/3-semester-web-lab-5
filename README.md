@@ -33,7 +33,7 @@ build-latex:
 - Create git tag
 
 ```
-git tabs <tag-name>
+git tab <tag-name>
 ```
 
 - Push tags to github
