@@ -25,7 +25,6 @@ async function run() {
     (latexFile) => new Artifact(latexFile.outputFilePath),
   );
 
-
   // Create relese
   const git = github.getOctokit(inputs.repoToken);
 
